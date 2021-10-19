@@ -1,10 +1,12 @@
 {
   "name": "@ndhoule/node-runtime-stats",
-  "version": "1.0.0-beta.2",
+  "version": "1.0.0-beta.3",
   "description": "A module that collects Node diagnostics information and publishes it to a diagnostics channel.",
   "main": "dist/index.js",
   "types": "dist/index.d.js",
-  "files": ["dist/**"],
+  "files": [
+    "dist/**"
+  ],
   "author": "Nathan Houle <nathan@nathanhoule.com>",
   "license": "MIT",
   "engines": {
