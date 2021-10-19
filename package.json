@@ -4,6 +4,7 @@
   "description": "A module that collects Node diagnostics information and publishes it to a diagnostics channel.",
   "main": "dist/index.js",
   "types": "dist/index.d.js",
+  "files": ["dist/**"],
   "author": "Nathan Houle <nathan@nathanhoule.com>",
   "license": "MIT",
   "engines": {
