@@ -10,7 +10,7 @@
     "node": ">= 14.17.0"
   },
   "scripts": {
-    "build": "rm -rf dist ; tsc --sourceMap --outDir dist/",
+    "build": "rm -rf dist ; tsc --sourceMap --declaration --declarationMap --outDir dist/",
     "lint": "eslint --cache .",
     "lint:fix": "eslint --cache --fix .",
     "test": "jest",
