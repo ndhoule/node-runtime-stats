@@ -63,7 +63,7 @@ export const installStatsMonitor = ({
         // stats on subscribe.
         const stats = getStats();
 
-        if (channel.hasSubscribers) {
+        if (!channel.hasSubscribers) {
           return;
         }
 
