@@ -1,16 +1,31 @@
 {
   "name": "@ndhoule/node-runtime-stats",
-  "version": "1.0.0-alpha.0",
-  "main": "index.js",
+  "version": "1.0.0-beta.0",
+  "description": "A module that collects Node diagnostics information and publishes it to a diagnostics channel.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.js",
   "author": "Nathan Houle <nathan@nathanhoule.com>",
   "license": "MIT",
   "engines": {
-    "node": ">= 12.19.0"
+    "node": ">= 14.17.0"
   },
-  "dependencies": {},
+  "scripts": {
+    "build": "rm -rf dist ; tsc --sourceMap --outDir dist/",
+    "lint": "eslint --cache .",
+    "lint:fix": "eslint --cache --fix .",
+    "test": "jest",
+    "typecheck": "tsc --noEmit",
+    "typecheck:watch": "tsc --noEmit --incremental --watch"
+  },
   "devDependencies": {
-    "@ndhoule/eslint-config": "^5.0.0-beta.6",
-    "eslint": "^7.32.0",
-    "prettier": "2.4.1"
+    "@jest/globals": "^27.3.1",
+    "@ndhoule/eslint-config": "^5.0.0-beta.9",
+    "@tsconfig/node16": "^1.0.2",
+    "@types/node": "^16.11.1",
+    "eslint": "^8.0.1",
+    "jest": "^27.3.1",
+    "prettier": "2.4.1",
+    "ts-node": "^10.3.0",
+    "typescript": "^4.4.4"
   }
 }
