@@ -55,6 +55,9 @@ export const installStatsMonitor = ({
 }: CreateStatsMonitorOptions = {}): (() => void) => {
   const getStats = createGetRuntimeStats();
 
+  // Prime state for stateful statistics gatherers
+  getStats();
+
   const intervalId = timers
     .setInterval(() => {
       try {
