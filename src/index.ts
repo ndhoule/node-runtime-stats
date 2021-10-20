@@ -29,6 +29,9 @@ export type DiagnosticsMessage =
   | { name: "runtime.node.cpu.system"; value: number }
   | { name: "runtime.node.cpu.total"; value: number }
   | { name: "runtime.node.cpu.user"; value: number }
+  | { name: "runtime.node.cpu.system_time"; value: number }
+  | { name: "runtime.node.cpu.total_time"; value: number }
+  | { name: "runtime.node.cpu.user_time"; value: number }
   | { name: "runtime.node.process.uptime"; value: number };
 
 export const channelName = "@ndhoule/node-runtime-stats";
@@ -149,12 +152,24 @@ export const installStatsMonitor = ({
           value: stats.runtime.node.cpu.system,
         });
         channel.publish({
+          name: "runtime.node.cpu.system_time",
+          value: stats.runtime.node.cpu.systemTime,
+        });
+        channel.publish({
           name: "runtime.node.cpu.total",
           value: stats.runtime.node.cpu.total,
         });
         channel.publish({
+          name: "runtime.node.cpu.total_time",
+          value: stats.runtime.node.cpu.totalTime,
+        });
+        channel.publish({
           name: "runtime.node.cpu.user",
           value: stats.runtime.node.cpu.user,
+        });
+        channel.publish({
+          name: "runtime.node.cpu.user_time",
+          value: stats.runtime.node.cpu.userTime,
         });
         channel.publish({
           name: "runtime.node.process.uptime",

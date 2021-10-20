@@ -4,10 +4,35 @@ import * as v8 from "node:v8";
 import * as os from "os";
 
 const createGetCpuUsageStats = () => {
-  let stats: NodeJS.CpuUsage | undefined;
-  return (): NodeJS.CpuUsage => {
-    stats = process.cpuUsage(stats);
-    return stats;
+  let lastTime: [number, number];
+  let lastStats: NodeJS.CpuUsage | undefined;
+
+  return (): {
+    system: number;
+    systemTime: number;
+    total: number;
+    totalTime: number;
+    user: number;
+    userTime: number;
+  } => {
+    const time = process.hrtime(lastTime);
+    const stats = process.cpuUsage(lastStats);
+
+    const ms = time[0] * 1000 + time[1] / 1000000;
+    const user = (100 * stats.user) / 1000 / ms;
+    const system = (100 * stats.system) / 1000 / ms;
+
+    lastTime = time;
+    lastStats = stats;
+
+    return {
+      system,
+      systemTime: stats.system,
+      total: user + system,
+      totalTime: stats.user + stats.system,
+      user,
+      userTime: stats.user,
+    };
   };
 };
 
@@ -40,8 +65,11 @@ export interface NodeRuntimeStats {
     node: {
       cpu: {
         system: number;
+        systemTime: number;
         total: number;
+        totalTime: number;
         user: number;
+        userTime: number;
       };
       eventLoop: {
         active: number;
@@ -89,8 +117,11 @@ export const createGetRuntimeStats = (): (() => NodeRuntimeStats) => {
         node: {
           cpu: {
             system: cpuUsageStats.system,
-            total: cpuUsageStats.system + cpuUsageStats.user,
-            user: cpuUsageStats.user,
+            systemTime: cpuUsageStats.systemTime,
+            total: cpuUsageStats.user,
+            totalTime: cpuUsageStats.systemTime + cpuUsageStats.userTime,
+            user: cpuUsageStats.system + cpuUsageStats.user,
+            userTime: cpuUsageStats.userTime,
           },
           eventLoop: {
             active: eluStats.active,
