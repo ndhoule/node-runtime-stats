@@ -1,6 +1,6 @@
 {
   "name": "@ndhoule/node-runtime-stats",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A module that collects Node diagnostics information and publishes it to a diagnostics channel.",
   "main": "dist/index.js",
   "types": "dist/index.d.js",
