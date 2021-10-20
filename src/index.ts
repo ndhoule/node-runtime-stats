@@ -20,8 +20,8 @@ export type DiagnosticsMessage =
   | { name: "runtime.node.heap.heap_size_limit"; value: number }
   | { name: "runtime.node.heap.malloced_memory"; value: number }
   | { name: "runtime.node.heap.peak_malloced_memory"; value: number }
-  | { name: "runtime.node.heap_used"; value: number }
-  | { name: "runtime.node.heap_total"; value: number }
+  | { name: "runtime.node.mem.heap_used"; value: number }
+  | { name: "runtime.node.mem.heap_total"; value: number }
   | { name: "runtime.node.mem.external"; value: number }
   | { name: "runtime.node.mem.rss"; value: number }
   | { name: "runtime.node.mem.total"; value: number }
@@ -112,13 +112,13 @@ export const installStatsMonitor = ({
         });
         if (stats.runtime.node.memory.heapUsed != null) {
           channel.publish({
-            name: "runtime.node.heap_used",
+            name: "runtime.node.mem.heap_used",
             value: stats.runtime.node.memory.heapUsed,
           });
         }
         if (stats.runtime.node.memory.heapTotal != null) {
           channel.publish({
-            name: "runtime.node.heap_total",
+            name: "runtime.node.mem.heap_total",
             value: stats.runtime.node.memory.heapTotal,
           });
         }
