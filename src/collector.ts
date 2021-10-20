@@ -12,10 +12,12 @@ const createGetCpuUsageStats = () => {
 };
 
 const createGetEventLoopUtilizationStats = () => {
-  let stats: perfHooks.EventLoopUtilization | undefined;
+  let lastStats: perfHooks.EventLoopUtilization | undefined;
   return (): perfHooks.EventLoopUtilization => {
-    stats = perfHooks.performance.eventLoopUtilization(stats);
-    return stats;
+    const stats = perfHooks.performance.eventLoopUtilization();
+    const delta = perfHooks.performance.eventLoopUtilization(stats, lastStats);
+    lastStats = stats;
+    return delta;
   };
 };
 
